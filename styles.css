@@ -1,0 +1,232 @@
+/* ---------- Theme: re-skin the whole page from here ---------- */
+:root {
+  --brand: #2E3092;          /* SPZONE navy, sampled from logo */
+  --brand-hover: #26287C;
+  --accent: #ED1D24;         /* SPZONE red, sampled from logo; accents only */
+  --on-brand: #FFFFFF;
+
+  --bg: #EEF0F7;
+  --surface: #FFFFFF;
+  --text: #14162B;
+  --text-muted: #5B5E73;
+  --border: rgba(20, 22, 43, 0.08);
+  --focus: #2E3092;
+
+  --radius: 14px;
+  --radius-card: 24px;
+  --shadow-card: 0 1px 2px rgba(20, 22, 43, 0.04), 0 12px 32px rgba(20, 22, 43, 0.08);
+  --shadow-btn-hover: 0 8px 20px rgba(46, 48, 146, 0.28);
+
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand: #3437A6;        /* one step lighter so buttons separate from the dark card */
+    --brand-hover: #3D40B8;
+    --bg: #090A16;
+    --surface: #12142A;
+    --text: #F2F3FA;
+    --text-muted: #A2A5BF;
+    --border: rgba(255, 255, 255, 0.10);
+    --focus: #AEB1FF;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px rgba(0, 0, 0, 0.45);
+    --shadow-btn-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Card ---------- */
+.card {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: max(40px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+  background: var(--surface);
+}
+
+/* Floating card once there's room around it */
+@media (min-width: 480px) {
+  body { align-items: center; padding: 40px 16px; }
+  .card {
+    min-height: auto;
+    padding: 44px 28px 28px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+/* ---------- Profile ---------- */
+.profile {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.logo-wrap {
+  margin: 0;
+  line-height: 0;
+}
+
+.logo {
+  display: block;
+  width: 220px;
+  height: auto;
+}
+
+/* Logo artwork is navy-on-white, so keep it on white in dark mode */
+@media (prefers-color-scheme: dark) {
+  .logo-wrap {
+    padding: 14px 18px;
+    background: #FFFFFF;
+    border-radius: var(--radius);
+  }
+}
+
+/* ---------- Links ---------- */
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--brand);
+  color: var(--on-brand);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out),
+    background-color 200ms var(--ease-out);
+}
+
+/* Red brand accent bar, revealed on hover/press */
+.link::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transition: transform 200ms var(--ease-out);
+}
+
+.link__icon,
+.link__arrow {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.link__icon svg,
+.link__arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.link__label { flex: 1; }
+
+.link__arrow {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+  transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    background: var(--brand-hover);
+    transform: scale(1.02);
+    box-shadow: var(--shadow-btn-hover);
+  }
+  .link:hover::before { transform: scaleY(1); }
+  .link:hover .link__arrow { opacity: 1; transform: translate(2px, -2px); }
+}
+
+.link:active {
+  transform: scale(0.98);
+  box-shadow: none;
+}
+.link:active::before { transform: scaleY(1); }
+
+.link:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.noscript {
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: auto;
+  padding-top: 32px;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+.footer p { margin: 0; }
+
+/* ---------- Entrance animation ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .profile,
+  .link {
+    animation: fade-up 420ms var(--ease-out) both;
+  }
+  /* --i is set per link in script.js */
+  .link { animation-delay: calc(80ms + var(--i, 0) * 50ms); }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link, .link::before, .link__arrow { transition: none; }
+}
