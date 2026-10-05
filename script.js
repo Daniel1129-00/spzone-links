@@ -2,8 +2,8 @@
 // icon: one of the keys in ICONS below. utm: true appends ?utm_source=linkpage.
 const LINKS = [
   { label: "Facebook",         url: "https://www.facebook.com/Speedcarair",     icon: "facebook",  enabled: true },
-  { label: "Instagram",        url: "https://www.instagram.com/your-handle",    icon: "instagram", enabled: true }, // TODO: real Instagram URL
-  { label: "TikTok",           url: "https://www.tiktok.com/@your-handle",      icon: "tiktok",    enabled: true }, // TODO: real TikTok URL
+  { label: "Instagram",        url: "https://www.instagram.com/your-handle",    icon: "instagram", enabled: false }, // TODO: real Instagram URL
+  { label: "TikTok",           url: "https://www.tiktok.com/@your-handle",      icon: "tiktok",    enabled: false }, // TODO: real TikTok URL
   { label: "Google Maps",      url: "https://maps.app.goo.gl/XmUwZWpZraPy1iSJA", icon: "mapPin",   enabled: true },
   { label: "Visit Website",    url: "https://www.spzone.com.my",                icon: "globe",     enabled: true, utm: true },
   { label: "Chat on WhatsApp", url: "https://wa.me/60109025299",                icon: "whatsapp",  enabled: true },
